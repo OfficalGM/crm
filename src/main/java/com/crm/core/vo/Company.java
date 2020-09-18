@@ -1,4 +1,4 @@
-package com.crm.vo;
+package com.crm.core.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
