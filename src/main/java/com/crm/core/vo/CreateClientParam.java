@@ -9,13 +9,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class ModifyParam {
+public class CreateClientParam {
 
-    private Long id;
+    private Long companyId;
 
     private String name;
 
-    private String address;
+    private String email;
+
+    private String phone;
+
+    private String createdBy;
 
     private String updatedBy;
 

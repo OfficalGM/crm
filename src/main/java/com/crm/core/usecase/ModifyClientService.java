@@ -1,7 +1,8 @@
 package com.crm.core.usecase;
 
+import com.crm.core.vo.Client;
 import com.crm.core.vo.Company;
-import com.crm.core.vo.ModifyCompanyParam;
+import com.crm.core.vo.ModifyClientParam;
 import com.crm.port.ModifyPort;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -14,20 +15,21 @@ import java.time.Instant;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class ModifyCompanyService {
+public class ModifyClientService {
 
-    private final ModifyPort<Company> modifyPort;
+    private final ModifyPort<Client> modifyPort;
 
-    public boolean modify(final @NonNull ModifyCompanyParam param) {
+    public boolean modify(final @NonNull ModifyClientParam param) {
         log.debug("modify param={}", param);
-        final Company company = Company.builder()
+        final Client client = Client.builder()
                 .id(param.getId())
+                .companyId(param.getCompanyId())
                 .name(param.getName())
-                .address(param.getAddress())
+                .email(param.getEmail())
                 .updatedBy(param.getUpdatedBy())
                 .updatedAt(Timestamp.from(Instant.now()))
                 .build();
-        final long result = modifyPort.update(company);
+        final long result = modifyPort.update(client);
         return result != 0L;
     }
 

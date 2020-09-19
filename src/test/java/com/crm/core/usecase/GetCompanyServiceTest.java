@@ -40,7 +40,7 @@ class GetCompanyServiceTest {
     }
 }
 
-class FakeGetPort implements GetPort {
+class FakeGetPort implements GetPort<Company> {
 
     private final List<Company> companyList;
 
@@ -55,7 +55,7 @@ class FakeGetPort implements GetPort {
     }
 }
 
-class EmptyGetPort implements GetPort {
+class EmptyGetPort implements GetPort<Company> {
 
     @Override
     public List<Company> findAll() {

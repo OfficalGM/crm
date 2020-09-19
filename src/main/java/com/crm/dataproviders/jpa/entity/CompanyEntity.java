@@ -17,7 +17,7 @@ import java.sql.Timestamp;
 public class CompanyEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;

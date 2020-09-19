@@ -1,7 +1,7 @@
 package com.crm.core.usecase;
 
 import com.crm.core.vo.Company;
-import com.crm.core.vo.ModifyParam;
+import com.crm.core.vo.ModifyCompanyParam;
 import com.crm.port.ModifyPort;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +33,7 @@ public class ModifyCompanyServiceTest {
     public void modify_failed() {
         initFakeService();
 
-        final boolean result = modifyCompanyService.modify(ModifyParam.builder().build());
+        final boolean result = modifyCompanyService.modify(ModifyCompanyParam.builder().build());
 
         assertThat(result).isFalse();
     }
@@ -42,7 +42,7 @@ public class ModifyCompanyServiceTest {
     public void modify() {
         initService();
 
-        final boolean result = modifyCompanyService.modify(ModifyParam.builder().build());
+        final boolean result = modifyCompanyService.modify(ModifyCompanyParam.builder().build());
 
         assertThat(result).isTrue();
     }

@@ -14,9 +14,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("admin").password("{noop}123").roles("ADMIN")
                 .and()
-                .withUser("manager").password("{noop}123").roles("manager")
+                .withUser("manager").password("{noop}123").roles("MANAGER")
                 .and()
-                .withUser("operator").password("{noop}123").roles("operator");
+                .withUser("operator").password("{noop}123").roles("OPERATOR");
     }
 
 
@@ -24,11 +24,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers(HttpMethod.DELETE,"company").hasAnyRole("MANAGER", "SUPERUSER")
-                .antMatchers(HttpMethod.PUT,"company").hasAnyRole("MANAGER", "SUPERUSER")
-                .antMatchers(HttpMethod.POST,"company").hasAnyRole("OPERATOR", "SUPERUSER")
-                .antMatchers(HttpMethod.POST,"companys").hasAnyRole("OPERATOR", "SUPERUSER")
-                .antMatchers(HttpMethod.GET,"companys").hasAnyRole("OPERATOR", "MANAGER", "SUPERUSER")
+                .antMatchers(HttpMethod.DELETE,"/**/company/**/").hasAnyRole("MANAGER", "SUPERUSER")
+                .antMatchers(HttpMethod.PUT,"/**/company/**/").hasAnyRole("MANAGER", "SUPERUSER")
+                .antMatchers(HttpMethod.POST,"/**/company/**/").hasAnyRole("OPERATOR", "SUPERUSER")
+                .antMatchers(HttpMethod.POST,"/**/companys/**/").hasAnyRole("OPERATOR", "SUPERUSER")
+                .antMatchers(HttpMethod.GET,"/**/companys/**/").hasAnyRole("OPERATOR", "MANAGER", "SUPERUSER")
+                .antMatchers(HttpMethod.DELETE,"/**/client/**/").hasAnyRole("MANAGER", "SUPERUSER")
+                .antMatchers(HttpMethod.PUT,"/**/client/**/").hasAnyRole("MANAGER", "SUPERUSER")
+                .antMatchers(HttpMethod.POST,"/**/client/**/").hasAnyRole("OPERATOR", "SUPERUSER")
+                .antMatchers(HttpMethod.POST,"/**/clients/**/").hasAnyRole("OPERATOR", "SUPERUSER")
+                .antMatchers(HttpMethod.GET,"/**/clients/**/").hasAnyRole("OPERATOR", "MANAGER", "SUPERUSER")
                 .anyRequest()
                 .authenticated()
                 .and()

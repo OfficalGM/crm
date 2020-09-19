@@ -1,6 +1,6 @@
 package com.crm.core.usecase;
 
-import com.crm.core.vo.Company;
+import com.crm.core.vo.Client;
 import com.crm.port.DeletePort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class DeleteCompanyService {
+public class DeleteClientService {
 
-    private final DeletePort<Company> deletePort;
+    private final DeletePort<Client> deletePort;
 
     public boolean delete(long id) {
         if (id <= 0) {
@@ -19,5 +19,4 @@ public class DeleteCompanyService {
         }
         return deletePort.delete(id);
     }
-
 }
