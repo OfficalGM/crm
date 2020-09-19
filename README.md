@@ -31,12 +31,18 @@
 ## Swagger UI
 - http://localhost:8080/swagger-ui.html
 
+## Docker
+
+- How to use
+    - cd ./docker
+    - docker-compose up -d
+
 ## Implementation
 
-- Use Spring Boot Framewokr to build rest api
+- Use Spring Boot Framework to build rest api
 - HTTP method POST, GET, PUT, DELETE for rest API
 - Use Spring Data Jpa to map entity `Company` and `Client`
-- Implment Port and Adapter architecture
+- Implement Port and Adapter architecture
 - Use Spring Security to handler every request. Use Basic Authentication due to time limit.
 - Use @ControllerAdvice to handler all Exception throwed, preventing internal error stack trace message send out
 - Use Lombok to reduce duplicate code, making development easier, faster and comfortable.

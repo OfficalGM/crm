@@ -1,0 +1,16 @@
+version: '3'
+services:
+  crm-server:
+    container_name: crm-server
+    build: .
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+    volumes:
+      - ./logback-spring.xml:/logback-spring.xml
+      - ./application.yml:/application.yml
+      - ./logs:/logs
+    ports:
+      - "8080:8080"
+    restart: always
