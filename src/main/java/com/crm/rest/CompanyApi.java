@@ -1,9 +1,11 @@
 package com.crm.rest;
 
 import com.crm.core.usecase.GetCompanyService;
+import com.crm.core.usecase.ModifyCompanyService;
 import com.crm.core.usecase.StoreCompanyService;
 import com.crm.core.vo.Company;
 import com.crm.core.vo.CreateCompanyParam;
+import com.crm.core.vo.ModifyParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +23,8 @@ public class CompanyApi {
     private final GetCompanyService getCompanyService;
 
     private final StoreCompanyService storeCompanyService;
+
+    private final ModifyCompanyService modifyCompanyService;
 
     @GetMapping("/companys")
     public ResponseEntity<List<Company>> view() {
@@ -90,7 +94,7 @@ public class CompanyApi {
     @NoArgsConstructor
     @Data
     @Builder
-    static class UpdateReq {
+    static class ModifyReq {
 
         private Long id;
 
@@ -102,10 +106,19 @@ public class CompanyApi {
     }
 
     @PutMapping(value = "company")
-    public ResponseEntity<ResInfo> modify(@RequestBody final UpdateReq req) {
+    public ResponseEntity<ResInfo> modify(@RequestBody final ModifyReq req) {
         log.debug("modify() req={}", req);
-        //TODO update one
-        return null;
+        final ModifyParam param = ModifyParam.builder()
+                .id(req.getId())
+                .name(req.getName())
+                .address(req.getAddress())
+                .updatedBy(req.getUpdatedBy())
+                .build();
+        final boolean result = modifyCompanyService.modify(param);
+        log.debug("modify() result={}", result);
+        return ResponseEntity.ok(ResInfo.builder()
+                .result(result)
+                .build());
     }
 
     @DeleteMapping(value = "company/{id}")
