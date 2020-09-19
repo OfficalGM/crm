@@ -1,7 +1,7 @@
 package com.crm.core.usecase;
 
 import com.crm.core.vo.Company;
-import com.crm.port.GetCompanyPort;
+import com.crm.port.GetPort;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -13,19 +13,17 @@ class GetCompanyServiceTest {
 
     GetCompanyService getCompanyService;
 
-    public GetCompanyService initEmptyCompanyService() {
-        getCompanyService = new GetCompanyService(new EmptyGetCompanyPort());
-        return getCompanyService;
+    public void initEmptyCompanyService() {
+        getCompanyService = new GetCompanyService(new EmptyGetPort());
     }
 
-    public GetCompanyService initCompanyService() {
-        getCompanyService = new GetCompanyService(new FakeGetCompanyPort());
-        return getCompanyService;
+    public void initCompanyService() {
+        getCompanyService = new GetCompanyService(new FakeGetPort());
     }
 
     @Test
     public void test_obtainAll_empty() {
-        getCompanyService = initEmptyCompanyService();
+       initEmptyCompanyService();
 
         List<Company> resultList = getCompanyService.obtainAll();
 
@@ -34,7 +32,7 @@ class GetCompanyServiceTest {
 
     @Test
     public void test_obtainAll() {
-        getCompanyService = initCompanyService();
+        initCompanyService();
 
         List<Company> resultList = getCompanyService.obtainAll();
 
@@ -42,11 +40,11 @@ class GetCompanyServiceTest {
     }
 }
 
-class FakeGetCompanyPort implements GetCompanyPort {
+class FakeGetPort implements GetPort {
 
     private final List<Company> companyList;
 
-    public FakeGetCompanyPort() {
+    public FakeGetPort() {
         this.companyList = new ArrayList<>();
     }
 
@@ -57,7 +55,7 @@ class FakeGetCompanyPort implements GetCompanyPort {
     }
 }
 
-class EmptyGetCompanyPort implements GetCompanyPort {
+class EmptyGetPort implements GetPort {
 
     @Override
     public List<Company> findAll() {

@@ -1,7 +1,7 @@
 package com.crm.core.usecase;
 
 import com.crm.core.vo.Company;
-import com.crm.port.GetCompanyPort;
+import com.crm.port.GetPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,10 +13,10 @@ import java.util.List;
 @Service
 public class GetCompanyService {
 
-    private final GetCompanyPort getCompanyPort;
+    private final GetPort<Company> getPort;
 
     public List<Company> obtainAll() {
-        return getCompanyPort.findAll();
+        return getPort.findAll();
     }
 
 }
