@@ -40,7 +40,7 @@ public class CompanyApi {
     @NoArgsConstructor
     @Data
     @Builder
-    static class CreateClientReq {
+    static class CreateCompanyReq {
 
         private String name;
 
@@ -60,7 +60,7 @@ public class CompanyApi {
     }
 
     @PostMapping("/company")
-    public ResponseEntity<ResInfo> create(@RequestBody final CreateClientReq req) {
+    public ResponseEntity<ResInfo> create(@RequestBody final CreateCompanyReq req) {
         log.debug("create() req={}", req);
         final boolean result = storeCompanyService.create(CreateCompanyParam.builder()
                 .address(req.getAddress())
@@ -76,7 +76,7 @@ public class CompanyApi {
 
     @ApiOperation(value = "insert Mutiple company", notes = "insert Mutiple company object")
     @PostMapping("/companys")
-    public ResponseEntity<ResInfo> create(@RequestBody final List<CreateClientReq> reqList) {
+    public ResponseEntity<ResInfo> create(@RequestBody final List<CreateCompanyReq> reqList) {
         log.debug("create() reqList={}", reqList);
         final List<CreateCompanyParam> paramList = reqList.stream().map(req -> {
             return CreateCompanyParam
