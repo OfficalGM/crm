@@ -97,7 +97,7 @@ public class CompanyApi {
     @NoArgsConstructor
     @Data
     @Builder
-    static class ModifyClientReq {
+    static class ModifyCompanyReq {
 
         private Long id;
 
@@ -109,7 +109,7 @@ public class CompanyApi {
     }
 
     @PutMapping(value = "company")
-    public ResponseEntity<ResInfo> modify(@RequestBody final ModifyClientReq req) {
+    public ResponseEntity<ResInfo> modify(@RequestBody final ModifyCompanyReq req) {
         log.debug("modify() req={}", req);
         final ModifyCompanyParam param = ModifyCompanyParam.builder()
                 .id(req.getId())
