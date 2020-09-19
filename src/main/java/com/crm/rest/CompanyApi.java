@@ -1,5 +1,6 @@
 package com.crm.rest;
 
+import com.crm.core.usecase.DeleteCompanyService;
 import com.crm.core.usecase.GetCompanyService;
 import com.crm.core.usecase.ModifyCompanyService;
 import com.crm.core.usecase.StoreCompanyService;
@@ -25,6 +26,8 @@ public class CompanyApi {
     private final StoreCompanyService storeCompanyService;
 
     private final ModifyCompanyService modifyCompanyService;
+
+    private final DeleteCompanyService deleteCompanyService;
 
     @GetMapping("/companys")
     public ResponseEntity<List<Company>> view() {
@@ -124,8 +127,11 @@ public class CompanyApi {
     @DeleteMapping(value = "company/{id}")
     public ResponseEntity<ResInfo> delete(@PathVariable Long id) {
         log.debug("delete() id={}", id);
-        //TODO delete one
-        return null;
+        final boolean result = deleteCompanyService.delete(id);
+        log.debug("delete() result={}", result);
+        return ResponseEntity.ok(ResInfo.builder()
+                .result(result)
+                .build());
     }
 
 }

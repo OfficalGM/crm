@@ -4,6 +4,7 @@ import com.crm.core.vo.Company;
 import com.crm.dataproviders.jpa.entity.CompanyEntity;
 import com.crm.dataproviders.jpa.repo.CompanyRepo;
 import com.crm.dataproviders.jpa.util.CompanyMapper;
+import com.crm.port.DeletePort;
 import com.crm.port.GetPort;
 import com.crm.port.ModifyPort;
 import com.crm.port.StorePort;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class CompanyAdapter implements GetPort<Company>, StorePort<Company>, ModifyPort<Company> {
+public class CompanyAdapter implements GetPort<Company>, StorePort<Company>, ModifyPort<Company>, DeletePort<Company> {
 
     private final CompanyRepo repo;
 
@@ -58,5 +59,11 @@ public class CompanyAdapter implements GetPort<Company>, StorePort<Company>, Mod
             return optional.get().getId();
         }
         return 0L;
+    }
+
+    @Override
+    public boolean delete(long id) {
+        repo.deleteById(id);
+        return true;
     }
 }
